@@ -1,0 +1,20 @@
+kind: pipeline
+name: default
+
+workspace:
+  # base: /go
+  path: ../go/src/github.com/jereksel/go-sonatype-nexus
+
+steps:
+- name: test
+  image: golang
+  environment:
+    CI: "true"
+    NEXUS_HOSTNAME: "nexus"
+  commands:
+  - ./wait_for_nexus.sh $NEXUS_HOSTNAME
+  - go test -race -coverprofile=coverage.txt -covermode=atomic
+
+services:
+- name: nexus
+  image: sonatype/nexus3:3.14.0

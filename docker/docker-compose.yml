@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  nexus:
+    build: .
+    hostname: nexus
+    ports:
+      - 5005:5005
+      - 8081:8081
+    volumes:
+      - "nexusdata:/nexus-data"
+
+volumes:
+  nexusdata:
