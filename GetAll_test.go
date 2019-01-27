@@ -24,6 +24,12 @@ func TestGetAll(t *testing.T) {
 		panic(err)
 	}
 
+	groupMavenName := "c-group-maven"
+
+	if err := CreateGroupMaven(conf, CreateGroupMavenRepositoryRequest{groupMavenName, []string{hostedMavenName, proxyMavenName}}); err != nil {
+		panic(err)
+	}
+
 	body, err := GetAll(conf)
 
 	if err != nil {
@@ -33,6 +39,7 @@ func TestGetAll(t *testing.T) {
 	exp := []Repository{
 		MavenHostedRepository{hostedMavenName},
 		MavenProxyRepository{proxyMavenName, "http://google.com"},
+		MavenGroupRepository{groupMavenName, []string{hostedMavenName, proxyMavenName}},
 	}
 
 	assert.Equal(t, exp, body)

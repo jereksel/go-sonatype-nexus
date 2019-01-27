@@ -2,7 +2,7 @@ class PrepareGoFiles {
 
     public static void main(args) {
 
-        def scripts = ["GetAll", "Remove", "CreateHostedMaven", "CreateProxyMaven"]
+        def scripts = ["GetAll", "Remove", "CreateHostedMaven", "CreateProxyMaven", "CreateGroupMaven"]
 
         def dest = new File("../scripts")
 

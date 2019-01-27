@@ -38,3 +38,20 @@ func CreateProxyMaven(conf Configuration, req CreateProxyMavenRepositoryRequest)
 	return nil
 
 }
+
+func CreateGroupMaven(conf Configuration, req CreateGroupMavenRepositoryRequest) error {
+
+	uuid, err := uploadGroovyScript(conf, scripts.CreateGroupMavenScript)
+
+	if err != nil {
+		return err
+	}
+
+	_, err = invokeScript(conf, uuid, req)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

@@ -40,6 +40,15 @@ func GetAll(conf Configuration) ([]Repository, error) {
 			repositories = append(repositories, MavenHostedRepository{result.Name})
 		} else if result.Type == "maven_proxy" {
 			repositories = append(repositories, MavenProxyRepository{result.Name, result.Data["remoteUrl"]})
+		} else if result.Type == "maven_group" {
+			membersString := result.Data["members"]
+			var members []string
+
+			if err := json.Unmarshal([]byte(membersString), &members); err != nil {
+				return nil, err
+			}
+
+			repositories = append(repositories, MavenGroupRepository{result.Name, members})
 		} else {
 
 		}

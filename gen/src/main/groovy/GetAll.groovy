@@ -2,6 +2,7 @@ import groovy.json.JsonBuilder
 import org.slf4j.Logger
 import org.sonatype.nexus.repository.Repository
 import org.sonatype.nexus.repository.maven.internal.Maven2Format
+import org.sonatype.nexus.repository.types.GroupType
 import org.sonatype.nexus.repository.types.HostedType
 import org.sonatype.nexus.repository.types.ProxyType
 import org.sonatype.nexus.script.plugin.internal.provisioning.RepositoryApiImpl
@@ -34,7 +35,16 @@ public class GetAll {
                             name: repository.name,
                             type: "maven_proxy",
                             data: [
-                                    "remoteUrl": remoteUrl
+                                    remoteUrl: remoteUrl
+                            ] as Map
+                    ]
+                } else if (repository.type == new GroupType()) {
+                    def members = repository.configuration.attributes("group").get("memberNames") as List<String>
+                    [
+                            name: repository.name,
+                            type: "maven_group",
+                            data: [
+                                    members: new JsonBuilder(members).toString()
                             ] as Map
                     ]
                 } else {
