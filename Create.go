@@ -4,7 +4,7 @@ import (
 	"github.com/jereksel/go-sonatype-nexus/scripts"
 )
 
-func Create(conf Configuration, req CreateHostedMavenRepositoryRequest) error {
+func CreateHostedMaven(conf Configuration, req CreateHostedMavenRepositoryRequest) error {
 
 	uuid, err := uploadGroovyScript(conf, scripts.CreateHostedMavenScript)
 
@@ -19,4 +19,22 @@ func Create(conf Configuration, req CreateHostedMavenRepositoryRequest) error {
 	}
 
 	return nil
+}
+
+func CreateProxyMaven(conf Configuration, req CreateProxyMavenRepositoryRequest) error {
+
+	uuid, err := uploadGroovyScript(conf, scripts.CreateProxyMavenScript)
+
+	if err != nil {
+		return err
+	}
+
+	_, err = invokeScript(conf, uuid, req)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+
 }

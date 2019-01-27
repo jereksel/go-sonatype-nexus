@@ -20,7 +20,7 @@ func TestRemoveExistingRepository(t *testing.T) {
 	{
 		createRequest := CreateHostedMavenRepositoryRequest{repository1Name}
 
-		if err := Create(conf, createRequest); err != nil {
+		if err := CreateHostedMaven(conf, createRequest); err != nil {
 			panic(err)
 		}
 
@@ -29,7 +29,7 @@ func TestRemoveExistingRepository(t *testing.T) {
 	{
 		createRequest := CreateHostedMavenRepositoryRequest{repository2Name}
 
-		if err := Create(conf, createRequest); err != nil {
+		if err := CreateHostedMaven(conf, createRequest); err != nil {
 			panic(err)
 		}
 

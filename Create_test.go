@@ -17,7 +17,7 @@ func TestCreate(t *testing.T) {
 
 	createRequest := CreateHostedMavenRepositoryRequest{repositoryName}
 
-	err := Create(conf, createRequest)
+	err := CreateHostedMaven(conf, createRequest)
 
 	if err != nil {
 		panic(err)

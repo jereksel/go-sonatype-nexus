@@ -3,18 +3,24 @@ package main
 import (
 	"testing"
 
-	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestAuthorizationsService_One(t *testing.T) {
+func TestGetAll(t *testing.T) {
 
 	conf := getConf()
 
 	removeAll(conf)
-	hostedMavenName := uuid.New().String()
 
-	if err := Create(conf, CreateHostedMavenRepositoryRequest{hostedMavenName}); err != nil {
+	hostedMavenName := "a-hosted-maven"
+
+	if err := CreateHostedMaven(conf, CreateHostedMavenRepositoryRequest{hostedMavenName}); err != nil {
+		panic(err)
+	}
+
+	proxyMavenName := "b-proxy-maven"
+
+	if err := CreateProxyMaven(conf, CreateProxyMavenRepositoryRequest{proxyMavenName, "http://google.com"}); err != nil {
 		panic(err)
 	}
 
@@ -24,8 +30,11 @@ func TestAuthorizationsService_One(t *testing.T) {
 		panic(err)
 	}
 
-	exp := []Repository{Repository{hostedMavenName, "maven2", "hosted"}}
+	exp := []Repository{
+		Repository{hostedMavenName, "maven2", "hosted"},
+		Repository{proxyMavenName, "maven2", "proxy"},
+	}
 
-	assert.Equal(t, exp, body, "The two words should be the same.")
+	assert.Equal(t, exp, body)
 
 }

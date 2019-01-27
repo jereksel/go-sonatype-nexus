@@ -31,3 +31,8 @@ func (r MavenRepository) GetType() string {
 type CreateHostedMavenRepositoryRequest struct {
 	Name string `json:"name"`
 }
+
+type CreateProxyMavenRepositoryRequest struct {
+	Name   string `json:"name"`
+	Remove string `json:"remote"`
+}

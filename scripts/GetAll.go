@@ -16,7 +16,9 @@ public class GetAll {
 
     String doStuff() {
 
-        def all = repo.repositoryManager.browse().collect { Repository repository ->
+        def all = repo.repositoryManager.browse()
+                .toSorted { it.name }
+                .collect { Repository repository ->
             [
                     name  : repository.name,
                     format: repository.format.value,
