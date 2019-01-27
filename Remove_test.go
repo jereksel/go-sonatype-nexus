@@ -45,6 +45,8 @@ func TestRemoveExistingRepository(t *testing.T) {
 		panic(err)
 	}
 
-	assert.Equal(t, []Repository{Repository{repository2Name, "maven2", "hosted"}}, allRepos)
+	assert.Equal(t, []Repository{
+		MavenHostedRepository{repository2Name},
+	}, allRepos)
 
 }

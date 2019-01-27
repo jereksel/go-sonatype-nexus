@@ -28,7 +28,7 @@ func removeAll(conf Configuration) {
 	}
 
 	for _, repo := range allRepos {
-		if err := Remove(conf, repo.Name); err != nil {
+		if err := Remove(conf, repo.GetName()); err != nil {
 			panic(err)
 		}
 	}

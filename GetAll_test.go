@@ -31,8 +31,8 @@ func TestGetAll(t *testing.T) {
 	}
 
 	exp := []Repository{
-		Repository{hostedMavenName, "maven2", "hosted"},
-		Repository{proxyMavenName, "maven2", "proxy"},
+		MavenHostedRepository{hostedMavenName},
+		MavenProxyRepository{proxyMavenName, "http://google.com"},
 	}
 
 	assert.Equal(t, exp, body)

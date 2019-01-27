@@ -29,6 +29,6 @@ func TestCreate(t *testing.T) {
 		panic(err)
 	}
 
-	assert.Equal(t, []Repository{Repository{repositoryName, "maven2", "hosted"}}, allRepos)
+	assert.Equal(t, []Repository{MavenHostedRepository{repositoryName}}, allRepos)
 
 }
