@@ -5,43 +5,20 @@ import (
 )
 
 func CreateHostedMaven(conf Configuration, req CreateHostedMavenRepositoryRequest) error {
-
-	uuid, err := uploadGroovyScript(conf, scripts.CreateHostedMavenScript)
-
-	if err != nil {
-		return err
-	}
-
-	_, err = invokeScript(conf, uuid, req)
-
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return create(conf, scripts.CreateHostedMavenScript, req)
 }
 
 func CreateProxyMaven(conf Configuration, req CreateProxyMavenRepositoryRequest) error {
-
-	uuid, err := uploadGroovyScript(conf, scripts.CreateProxyMavenScript)
-
-	if err != nil {
-		return err
-	}
-
-	_, err = invokeScript(conf, uuid, req)
-
-	if err != nil {
-		return err
-	}
-
-	return nil
-
+	return create(conf, scripts.CreateProxyMavenScript, req)
 }
 
 func CreateGroupMaven(conf Configuration, req CreateGroupMavenRepositoryRequest) error {
+	return create(conf, scripts.CreateGroupMavenScript, req)
+}
 
-	uuid, err := uploadGroovyScript(conf, scripts.CreateGroupMavenScript)
+func create(conf Configuration, script string, req interface{}) error {
+
+	uuid, err := uploadGroovyScript(conf, script)
 
 	if err != nil {
 		return err
@@ -54,4 +31,5 @@ func CreateGroupMaven(conf Configuration, req CreateGroupMavenRepositoryRequest)
 	}
 
 	return nil
+
 }
